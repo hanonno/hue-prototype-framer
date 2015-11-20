@@ -15,7 +15,7 @@ slider = new SliderComponent
 	x: 90
 	y: 48
 	width: 460
-	value: 0		
+	value: 0.5		
 slider.fill.backgroundColor = "#fff"
 slider.backgroundColor = "#000"
 	
@@ -45,7 +45,7 @@ drawGradient = (lightness) ->
 	canvasContext.fillStyle = gradient;
 	canvasContext.fillRect(0, 0, 640, 1136);
 
-drawGradient("50")
+drawGradient(50)
 
 # Setup light bulb
 bulb = new Layer
@@ -95,11 +95,7 @@ updateBulb = () ->
 bulb.on "change:point", updateBulb
 
 updateBrightness = () ->	
-	drawGradient(slider.value * 100)
+	drawGradient(slider.value * 80)
 	updateBulb()
 	
-slider.on "change:value", updateBrightness	
-
-		
-
-	    
+slider.on "change:value", updateBrightness
