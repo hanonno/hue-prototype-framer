@@ -28,11 +28,11 @@ slider.backgroundColor = "#000"
 
 offButton = layers["icon-zero-brightness"]
 offButton.on Events.Click, (event, layer) -> 
-	slider.states.switch("full")
+	slider.states.switch("zero")
 	
 onButton = layers["icon-full-brightness"]
 onButton.on Events.Click, (event, layer) ->
-	slider.states.switch("zero")
+	slider.states.switch("full")
 	
 # Create container view for background gradient
 canvasView = new Layer
@@ -78,17 +78,6 @@ contentFrame = background.frame
 contentFrame.height -= controls.frame.height
 bulb.draggable.constraints = contentFrame
 
-# Change the color of the bulb whenever it moves
-bulb.on "change:point", () ->
-	# Get the pixel value from the gradient in the canvas
-	pixel = canvasContext.getImageData(bulb.x + bulb.width / 2, bulb.y + bulb.height / 2, 1, 1).data
-	# Convert it to rgba
-	color = "rgba(" + pixel[0] + "," + pixel[1] + "," + pixel[2] + ",1)" 
-	# Set it if the color is not black (out of bounds)
-	if color != "rgba(0,0,0,1)"
-		this.backgroundColor = color			
-		
-	updateBrightness()
 
 # Grow the bulb a little bit while dragged
 bulb.on Events.DragStart, (event, layer) -> 
@@ -114,8 +103,21 @@ brightness = new Layer
 	height: 140
 
 updateBrightness = () ->	
-	luminosity.opacity = slider.value
-	brightness.opacity = (slider.value * (bulb.x / background.width) * 0.5)
+	luminosity.opacity = 1 - slider.value
+	brightness.opacity = 0.4 - (slider.value * (bulb.x / background.width))
+	print luminosity.opacity
 	
 slider.on "change:value", updateBrightness	
+	    
+# Change the color of the bulb whenever it moves
+bulb.on "change:point", () ->
+	# Get the pixel value from the gradient in the canvas
+	pixel = canvasContext.getImageData(bulb.x + bulb.width / 2, bulb.y + bulb.height / 2, 1, 1).data
+	# Convert it to rgba
+	color = "rgba(" + pixel[0] + "," + pixel[1] + "," + pixel[2] + ",1)" 
+	# Set it if the color is not black (out of bounds)
+	if color != "rgba(0,0,0,1)"
+		this.backgroundColor = color			
+		
+	updateBrightness()
 	    

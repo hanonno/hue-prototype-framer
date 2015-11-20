@@ -38,9 +38,9 @@ window.__imported__["hue/layers.json.js"] = [
 		"image": {
 			"path": "images/luminosity.png",
 			"frame": {
-				"x": 5,
+				"x": 0,
 				"y": 0,
-				"width": 635,
+				"width": 636,
 				"height": 1136
 			}
 		},
@@ -48,7 +48,7 @@ window.__imported__["hue/layers.json.js"] = [
 		"children": [
 			
 		],
-		"modification": "859943651"
+		"modification": "1602481920"
 	},
 	{
 		"id": 43,
@@ -84,7 +84,7 @@ window.__imported__["hue/layers.json.js"] = [
 				"image": {
 					"path": "images/icon-zero-brightness.png",
 					"frame": {
-						"x": 572,
+						"x": 38,
 						"y": 1071,
 						"width": 30,
 						"height": 30
@@ -109,7 +109,7 @@ window.__imported__["hue/layers.json.js"] = [
 				"image": {
 					"path": "images/icon-full-brightness.png",
 					"frame": {
-						"x": 32,
+						"x": 566,
 						"y": 1065,
 						"width": 42,
 						"height": 42
