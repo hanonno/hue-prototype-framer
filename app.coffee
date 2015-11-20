@@ -47,11 +47,34 @@ drawGradient = (lightness) ->
 
 drawGradient(50)
 
+class Bulb extends Layer
+	update: ->
+		# Get the pixel value from the gradient in the canvas
+		pixel = canvasContext.getImageData(this.x + this.width / 2, this.y + this.height / 2, 1, 1).data
+		# Convert it to rgba
+		color = "rgba(" + pixel[0] + "," + pixel[1] + "," + pixel[2] + ",1)" 
+		# Set it if the color is not black (out of bounds)
+		if color != "rgba(0,0,0,1)"
+			this.backgroundColor = color
+	grow: ->
+		this.animate 
+			properties:
+		        scale: 1.2
+		        opacity: 0.8
+		    time: 0.3
+		
+	shrink: ->
+		this.animate 
+			properties:
+		        scale: 1.0
+		        opacity: 1.0
+		    time: 0.3
+
 # Setup light bulb
-bulb = new Layer
+bulb = new Bulb
 	superlayer: background
-	x: 300
-	y: 400
+	x: -140
+	y: -140
 	width: 140
 	height: 140
 	backgroundColor: "#3c8f8e"
@@ -60,7 +83,6 @@ bulb = new Layer
 	borderColor: "#ddd"
 	shadowBlur: 80
 	shadowColor: "#333"
-bulb.center()
 
 bulb.draggable = true
 contentFrame = background.frame
@@ -68,34 +90,56 @@ contentFrame.height -= controls.frame.height
 bulb.draggable.constraints = contentFrame
 
 # Grow the bulb a little bit while dragged
-bulb.on Events.DragStart, (event, layer) -> 
-	this.animate 
-		properties:
-	        scale: 1.2
-	        opacity: 0.8
-	    time: 0.3
-
-bulb.on Events.DragEnd, (event, layer) -> 
-	this.animate 
-		properties:
-	        scale: 1.0
-	        opacity: 1.0
-	    time: 0.3
-
-updateBulb = () -> 
-	# Get the pixel value from the gradient in the canvas
-	pixel = canvasContext.getImageData(bulb.x + bulb.width / 2, bulb.y + bulb.height / 2, 1, 1).data
-	# Convert it to rgba
-	color = "rgba(" + pixel[0] + "," + pixel[1] + "," + pixel[2] + ",1)" 
-	# Set it if the color is not black (out of bounds)
-	if color != "rgba(0,0,0,1)"
-		bulb.backgroundColor = color
-
+bulb.on Events.DragStart, bulb.grow
+bulb.on Events.DragEnd, bulb.shrink
 # Change the color of the bulb whenever it moves
-bulb.on "change:point", updateBulb
+bulb.on "change:point", bulb.update
 
-updateBrightness = () ->	
-	drawGradient(slider.value * 80)
-	updateBulb()
+# Setup light bulb
+bulb2 = new Bulb
+	superlayer: background
+	x: 640+140
+	y: 1136+140
+	width: 140
+	height: 140
+	backgroundColor: "#3c8f8e"
+	borderRadius: 100
+	borderWidth: 8
+	borderColor: "#ddd"
+	shadowBlur: 80
+	shadowColor: "#333"
+
+bulb2.draggable = true
+contentFrame = background.frame
+contentFrame.height -= controls.frame.height
+bulb2.draggable.constraints = contentFrame
+
+# Grow the bulb a little bit while dragged
+bulb2.on Events.DragStart, bulb2.grow
+bulb2.on Events.DragEnd, bulb2.shrink
+# Change the color of the bulb whenever it moves
+bulb2.on "change:point", bulb2.update
+
 	
-slider.on "change:value", updateBrightness
+slider.on "change:value", ->
+	drawGradient(slider.value * 80)
+	bulb.update()
+	bulb2.update()
+	
+bulb.update()
+bulb2.update()
+
+
+bulb.states.add
+	start:
+		x: 140
+		y: 200
+		
+bulb2.states.add
+	start: 
+		x: 390
+		y: 1136-140-200
+
+
+bulb.states.switch("start")
+bulb2.states.switch("start")
