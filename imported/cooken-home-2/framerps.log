@@ -1,0 +1,32 @@
+Could not read previous export (for caching), doing full export.
+Renaming Meal:_breakfast -> Meal__breakfast
+Renaming Meal:_lunch -> Meal__lunch
+Renaming Meal:_dinner -> Meal__dinner
+Renaming Collection:_powerfoods -> Collection__powerfoods
+Renaming Header -> Header-2
+Renaming Article:_pie -> Article__pie
+Renaming Article:_Pulled -> Article__Pulled
+Renaming Article:_Ansel -> Article__Ansel
+Renaming Header -> Header-3
+Renaming Collection:_news -> Collection__news
+Renaming Header:_summer_recipe -> Header__summer_recipe
+Renaming Article:_dessert -> Article__dessert
+Renaming Header -> Header-4
+Renaming Button:_follow -> Button__follow
+Article:_dessert: Exporting image
+Header:_summer_recipe: Exporting image
+Header: Exporting image
+Article:_Ansel: Exporting image
+Article:_Pulled: Exporting image
+Article:_pie: Exporting image
+Header: Exporting image
+Header: Exporting image
+Meal:_dinner: Exporting image
+Meal:_lunch: Exporting image
+Meal:_breakfast: Exporting image
+Navigation_Bar_(with_back): Exporting image
+Status_bar_black: Exporting image
+Signal_&_Carrier: Exporting image
+Battery: Exporting image
+18 views changed
+Success: /var/folders/p4/_52c84g12d9ctz7925pm83xm0000gn/T/8FCEBDB7-DF56-4BC6-A293-AFB01E37B9D9-24206-0000FD8813763DF1/0902B0FF-9BB9-4628-B3AB-17618B993DB4/Untitled.framer/imported/cooken-home-2
